@@ -20,12 +20,12 @@ node {
   
     stage('deploy') {
       def resourceGroup = 'QuickstartJenkins-rg'
-      def webAppName = 'mywebapp1411'
+      def webAppName = 'mywebapp141'
       // login Azure
       withCredentials([usernamePassword(credentialsId: 'AzureServicePrincipal', passwordVariable: 'ASeRVGy4S8iXM7qUWRCjg3f_XC.QgvJBN8', usernameVariable: '123ae9b3-2041-496c-8269-bb280b72e247')]) {
        sh '''
-          az login --service-principal -u $123ae9b3-2041-496c-8269-bb280b72e247 -p $ASeRVGy4S8iXM7qUWRCjg3f_XC.QgvJBN8 -t $0adb040b-ca22-4ca6-9447-ab7b049a22ff
-          az account set -s $-- ee49381c-7f68-4134-baac-bed049fded9a
+          az login --service-principal -u $AZURE_CLIENT_ID -p $AZURE_CLIENT_SECRET -t $AZURE_TENANT_ID
+          az account set -s $AZURE_SUBSCRIPTION_ID
         '''
       }
       // get publish settings
